@@ -64,8 +64,8 @@ def valida_login(request):
         return redirect('/auth/login?status=1')
     elif len(usuarios) > 0:
         request.session['usuario'] = usuarios[0].id
-        return HttpResponse ('x')
-
+        return redirect('/home')
+        
 def sair(request):
   request.session.flush()
   return redirect('/auth/login')
