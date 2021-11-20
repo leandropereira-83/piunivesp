@@ -6,13 +6,18 @@ import hashlib
 
 
 def cadastro(request):
+    if request.session.get('usuario'):
+        return redirect('/home')
     status = request.GET.get('status')
     print(status)
 
     return render (request, 'cadastro.html', {'status': status} )
 
 def login(request):
-    return render (request, 'login.html')
+    if request.session.get('usuario'):
+        return redirect('/home')
+    status = request.GET.get('status')
+    return render (request, 'login.html', {'status': status})
 
 def valida_cadastro(request):
     nome = request.POST.get('nome')
@@ -46,3 +51,26 @@ def valida_cadastro(request):
 
     except:
         return HttpResponse ('Erro interno do sistema! Tente novamente em instantes.')
+
+def valida_login(request):
+
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
+    senha = hashlib.sha256(senha.encode('utf-8')).hexdigest()
+
+    usuarios = Usuario.objects.filter(email = email).filter(senha = senha)
+
+    if len(usuarios) == 0:
+        return redirect('/auth/login?status=1')
+    elif len(usuarios) > 0:
+        request.session['usuario'] = usuarios[0].id
+        return HttpResponse ('x')
+
+def sair(request):
+  request.session.flush()
+  return redirect('/auth/login')
+
+
+
+
+    

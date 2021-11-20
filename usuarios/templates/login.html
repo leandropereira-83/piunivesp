@@ -6,17 +6,27 @@ Logar
 
 {% block 'body' %}
 <div class="container">
+
+    {% if status == '1' %}
+    <br>
+
+    <div class="alert alert-danger" role="alert">
+    
+        <center> E-mail e/ou senha invávlido(s)  </center>
+      </div>
+    {% endif %}
+
     <div class="row">
         <div class = "col-md-3">
 
         </div>
 
-    <div class="row">
+    
         <div class="col-md">
             <br>
             <h1>Login</h1>
             <hr>
-            <form method="POST" action="#">
+            <form method="POST" action="{% url 'valida_login' %}"> {% csrf_token %}
                 <label>Digite seu Email:</label>
                 <input class="form-control form-control-sm" type="text" placeholder="E-mail..." name="email">
                 <br>
@@ -30,7 +40,7 @@ Logar
         
         <div class = "col-md-3">
                 
-        </div>
+        
         
     </div>
 
