@@ -1,12 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .models import Curso, Aula, Comentario, NotaAula
+from .models import UC, Atividade, Comentario, NotaAula
 import json
 
 
 def home(request):
     if request.session.get('usuario'):
-        cursos = Curso.objects.all()
+        cursos = UC.objects.all()
         request_usuario = request.session.get('usuario')
         
         return render(request, 'home.html',
@@ -17,8 +17,8 @@ def home(request):
 
 def curso(request, id):
     if request.session.get('usuario'):
-        v_curso = Curso.objects.get(id=id)
-        aulas = Aula.objects.filter(curso=v_curso)
+        v_curso = UC.objects.get(id=id)
+        aulas = Atividade.objects.filter(curso=v_curso)
         
         return render(request, 'curso.html',
                       {'curso': v_curso, 'aulas': aulas})
@@ -28,7 +28,7 @@ def curso(request, id):
 
 def aula(request, id):
     if request.session.get('usuario'):
-        aula = Aula.objects.get(id=id)
+        aula = Atividade.objects.get(id=id)
         usuario_id = request.session['usuario']
         comentarios = Comentario.objects.filter(aula=aula).order_by('-data')
 
