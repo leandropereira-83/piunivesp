@@ -20,6 +20,8 @@ class Atividade(models.Model):
     aula = models.FileField(upload_to="aulas")
     curso = models.ForeignKey(UC, on_delete=models.DO_NOTHING)
     obs_docente = models.TextField()
+    plano = models.FileField(upload_to="planos", blank=True, null=True)
+
 
     def __str__(self) -> str:
         return self.nome
