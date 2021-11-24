@@ -8,6 +8,8 @@ class UC(models.Model):
     descricao = models.TextField()
     thumb = models.ImageField(upload_to="thumb_cursos")
 
+
+
     def __str__(self) -> str:
         return self.nome
 
@@ -17,6 +19,7 @@ class Atividade(models.Model):
     descricao = models.TextField()
     aula = models.FileField(upload_to="aulas")
     curso = models.ForeignKey(UC, on_delete=models.DO_NOTHING)
+    obs_docente = models.TextField()
 
     def __str__(self) -> str:
         return self.nome
