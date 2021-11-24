@@ -45,7 +45,7 @@ Situações de Aprendizagem - Detalhes
 	<div class="alert alert-primary" role="alert">
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 			CLIQUE AQUI!
-		</button> para avaliar essa aula
+		</button> para avaliar esse plano
 	</div>
 	{% else %}
 
@@ -58,6 +58,22 @@ Situações de Aprendizagem - Detalhes
 		<source src="{{aula.aula.url}}" type="video/mp4">
 	</video>
 	<hr>
+
+	<h2> Observações do docente </h2>
+	<br>
+	{{aula.obs_docente}}
+	<hr>
+	<br>
+
+	<h2> Dowload do plano desenvolvido</h2>
+	<br>
+
+	<a href="{{aula.plano.url}}" target="blank"> Clique aqui</a>
+	
+	<hr>
+	<br>
+
+
 
 	<h3>Faça seu comentário: </h3>
 	<input id="comentario" type="text" placeholder="Comentário..." class="form-control form-control-sm">
